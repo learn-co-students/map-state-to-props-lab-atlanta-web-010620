@@ -4,15 +4,14 @@ import { connect } from 'react-redux'
 
 class Users extends Component {
   render() {
-    console.log(this.props.users)
+    let userList = this.props.users.map( user => <li key={user.username}>{user.username}</li>)
     return (
       <div>
+          Number of users is: {this.props.numberUsers}
         <ul>
           Users!
-          {this.props.users.map(user => {
-            return <li>{user.username}, {user.hometown}</li>
-          })}
-          {this.props.users.length}
+          {userList}
+          <br></br>
         </ul>
       </div>
     )
@@ -21,7 +20,9 @@ class Users extends Component {
 
   const mapStateToProps = (state) => {
     // console.log(state)
-    return {users: state.users}
+    return {users: state.users, 
+      numberUsers: state.users.length
+    }
   }
 
 // connect this component to Redux
